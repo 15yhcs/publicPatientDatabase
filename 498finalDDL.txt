@@ -1,0 +1,100 @@
+CREATE TABLE patient(
+PatientNum int not null primary key,
+Fname varchar(255) not null,
+Lname varchar(255) not null,
+Gender varchar(255) not null,
+Birthday date not null,
+Age integer not null,
+Email varchar(255) not null,
+Ptype varchar(255) not null,
+assignedDoc char(255),
+MedicalH varchar(255),
+PaidAmount integer,
+Street varchar(255) not null,
+city varchar(255) not null,
+PostalCode varchar(255) not null,
+province varchar(255) not null, 
+country varchar(255) not null,
+EmergencyContactName varchar(255) not null,
+EmergencyContactNum integer not null,
+Salutation varchar(255) not null,
+mailingName varchar(255) not null,
+homePhone integer not null,
+cellPhone integer not null,
+tStatus varchar(255) not null,
+tCause varchar(255),
+vstatus varchar(255) not null,
+a_group varchar(255),
+start_date date not null,
+end_date date,
+servingDuration varchar(255),
+disbility varchar(255),
+extraNote text
+);
+
+CREATE TABLE session(
+sessionID integer not null primary key,
+start_date date not null,
+end_date date not null,
+sessionLink varchar(255) not null,
+startTime time not null,
+endTime time not null,
+instructor varchar(255) not null,
+sessionType varchar(255) not null,
+sessionName varchar(255) not null,
+repeatDates longtext,
+repeatDays longtext,
+sessionDuration varchar(255) not null,
+sessionStatus varchar(255)
+);
+
+
+CREATE TABLE admin(
+id varchar(50) not null primary key,
+password varchar(50) not null,
+email varchar(50) not null,
+FirstName varchar(50) not null,
+LastName varchar(50) not null,
+securityLevel integer not null
+);
+
+CREATE TABLE course(
+c_id varchar(50) not null primary key,
+courseName varchar(255) not null,
+courseSpot integer not null 
+);
+
+
+
+CREATE TABLE document(
+documentID integer not null AUTO_INCREMENT primary key,
+name varchar(255) not null,
+type varchar(50) not null,
+fileConent blob
+);
+
+
+CREATE TABLE participate(
+patient integer not null,
+session integer not null,
+foreign key (patient) references Patient(patientNum),
+foreign key (session) references session(sessionID)
+);
+
+
+CREATE TABLE taken(
+patient integer not null,
+course varchar(50) not null,
+foreign key (patient) references Patient(patientNum),
+foreign key (course) references Course(c_id)
+);	
+
+
+CREATE TABLE waiting(
+patient integer not null,
+course varchar(50) not null,
+foreign key (patient) references Patient(patientNum),
+foreign key (course) references Course(c_id)
+);
+
+INSERT INTO admin (id, password,securityLevel, email, FirstName, LastName) VALUES ("123","asdjsbakhjsdbahjsdbha","1","angie.ms@queensu.ca","Angelica","Sweet");
